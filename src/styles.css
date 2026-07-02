@@ -1,0 +1,164 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-glow: var(--primary-glow);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+
+  --gradient-primary: var(--gradient-primary);
+  --shadow-purple: var(--shadow-purple);
+
+  --font-display: "Black Ops One", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Phaos light theme */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.02 290);
+
+  --surface: oklch(0.985 0.005 290);
+  --surface-2: oklch(0.965 0.008 290);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 290);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 290);
+
+  /* Phaos purple — tuned for white background */
+  --primary: oklch(0.55 0.24 305);
+  --primary-foreground: oklch(1 0 0);
+  --primary-glow: oklch(0.68 0.22 310);
+
+  --secondary: oklch(0.96 0.01 290);
+  --secondary-foreground: oklch(0.2 0.02 290);
+
+  --muted: oklch(0.96 0.01 290);
+  --muted-foreground: oklch(0.5 0.02 290);
+
+  --accent: oklch(0.95 0.04 305);
+  --accent-foreground: oklch(0.2 0.02 290);
+
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.55 0.16 155);
+  --success-foreground: oklch(1 0 0);
+
+  --border: oklch(0.9 0.01 290);
+  --input: oklch(0.92 0.01 290);
+  --ring: oklch(0.55 0.24 305);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.5 0.25 295), oklch(0.65 0.22 315));
+  --shadow-purple: 0 18px 40px -20px oklch(0.55 0.24 305 / 0.35);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: oklch(0.55 0.24 305 / 0.25);
+    color: var(--color-foreground);
+  }
+}
+
+@utility gradient-primary {
+  background-image: var(--gradient-primary);
+}
+
+@utility text-gradient-primary {
+  background-image: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+/* Phaos-purple range slider */
+.phaos-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    oklch(0.55 0.24 305) 0%,
+    oklch(0.55 0.24 305) var(--val, 50%),
+    oklch(0.55 0.24 305 / 0.15) var(--val, 50%),
+    oklch(0.55 0.24 305 / 0.15) 100%
+  );
+  outline: none;
+  cursor: pointer;
+}
+.phaos-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 22px;
+  width: 22px;
+  border-radius: 9999px;
+  background: white;
+  border: 3px solid oklch(0.55 0.24 305);
+  box-shadow: 0 4px 14px -2px oklch(0.55 0.24 305 / 0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.phaos-range::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+.phaos-range::-moz-range-thumb {
+  height: 22px;
+  width: 22px;
+  border-radius: 9999px;
+  background: white;
+  border: 3px solid oklch(0.55 0.24 305);
+  box-shadow: 0 4px 14px -2px oklch(0.55 0.24 305 / 0.5);
+  cursor: pointer;
+}
